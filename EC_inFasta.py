@@ -37,7 +37,7 @@ def EC_in_fasta():
      if not os.path.isdir(fast_output):
               os.makedirs(fast_output)     
      print ('Extractin of uniprot identifiers and Fasta file modification')
-     unip_EC={}#keyare uniprotid,value is EC
+     unip_EC={}#key are uniprotid,value is EC
      for e in EC_final:
           EC_number=e.split("EC ")[1]#string of ec_numbers to be used to find the protein identifier
           #if EC_number!='1.3.1.193':#this Ec is mentioned as new one in flat file comment but now is removed from the db
