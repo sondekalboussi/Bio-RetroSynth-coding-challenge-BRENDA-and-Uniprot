@@ -1,5 +1,7 @@
 # Bio-RetroSynth-coding-challenge-BRENDA-and-Uniprot
 For every EC number listed in the BRENDA database, retrieve all the Uniprot accessions associated to the EC number in FASTA format. The corresponding EC number(s) from BRENDA must be present in the FASTA header.
+The Tstarting point of this code is a project improved by Alexandra-zaharia https://github.com/alexandra-zaharia/BRENDA-Parser
+
 # BRENDA
 The BRENDA database is the most important repository on enzyme activity and enzyme
 ligands. Website: https://www.brenda-enzymes.org/
