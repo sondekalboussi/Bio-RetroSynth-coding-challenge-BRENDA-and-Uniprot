@@ -39,6 +39,7 @@ def EC_in_fasta():
      print ('Extractin of uniprot identifiers and Fasta file modification')
      for e in EC_final:
           EC_number=e.split("EC ")[1]#string of ec_numbers to be used to find the protein identifier
+          #if EC_number!='1.3.1.193':#this Ec is mentioned as new one in flat file comment but now is removed from the db
           for prot_id in brenda[EC_number][0].proteins:
                protein = brenda[EC_number][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
