@@ -34,8 +34,8 @@ def EC_in_fasta():
                if i not in EC_final:#remove duplicated EC numbers
                     EC_final.append(i)               
      print(str(len(EC_final)),'EC number were parsed.')
-     if not os.path.isdir(fast_outputfolder):
-              os.makedirs(fast_outputfolder)     
+     if not os.path.isdir(fast_output):
+              os.makedirs(fast_output)     
      print ('Extractin of uniprot identifiers and Fasta file modification')
      for e in EC_final:
           EC_number=e.split("EC ")[1]#string of ec_numbers to be used to find the protein identifier
@@ -60,9 +60,9 @@ def EC_in_fasta():
                               f.close()                             
                     except Exception as e:
                          print (str(e))
-     print ('EC numbers are now added to Fasta headers')
+     #print ('EC numbers are now added to Fasta headers')
 if __name__ == "__main__":
      uniprot_url = "http://www.uniprot.org/uniprot/"  # constant Uniprot Namespace
      brenda_flat='brenda_download.txt'
      fast_output='EC_unip_fasta'
-     print (EC_infasta())
+     print (EC_in_fasta())
