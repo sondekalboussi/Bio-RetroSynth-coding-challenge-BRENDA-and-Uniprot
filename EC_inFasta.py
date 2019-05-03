@@ -7,11 +7,10 @@ Author: Sondes kalboussi
 import sys,os
 import re
 from urllib.request import urlopen
-
-sys.path.insert(0, 'BRENDA-Parser')
-from brenda.parser import BRENDAParser
 uniprot_url = "http://www.uniprot.org/uniprot/"  # constant Uniprot Namespace
 brenda_flat='Path to brenda_download.txt'
+
+
 def get_EC_uniprot_id(brenda_flat):
      '''
      -Parse the string representing a comment associated to an EC numbe
@@ -19,6 +18,9 @@ def get_EC_uniprot_id(brenda_flat):
      ones to a global variable
         '''
         global EC_final=[]#list of unique ec numbers from flat file
+        print ('Brenda parser is starting')
+        sys.path.insert(0, 'BRENDA-Parser')
+        from brenda.parser import BRENDAParser  
         with BRENDAParser(brenda_flat) as parser:
              try:
                  brenda = parser.parse()
