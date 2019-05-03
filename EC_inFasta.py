@@ -45,21 +45,22 @@ def EC_in_fasta():
                if len(uniprot_id)!=0:#for one EC number we can have more than one id depending on the organism
                     try:  
                          for id in uniprot_id:
-                              url_with_id = "%s%s%s" %(uniprot_url, id, ".fasta") 
-                              file_from_uniprot =urlopen(url_with_id)
-                              fasta=file_from_uniprot.readlines()
-                              f=open(fast_output+'/'+e+'_'+id+'.fasta','w')
-                              for line in fasta:
-                                   line=line.decode('utf-8')#remove the Bytes literals,b', from lines 
-                                   if 'SV=' in line:
-                                      header=line.replace(line.strip(),line.strip()+' '+e.replace(' ','='))
-                                      f.write(header)
-                                   else:
-                                      fasta_seq=line.strip()
-                                      f.write(fasta_seq)
-                              f.close()                             
-                    except Exception as e:
-                         print (str(e))
+                              if id!='1.3.1.193':#this Ec is mentioned as new one in flat file comment but now is removed from the db
+                                   url_with_id = "%s%s%s" %(uniprot_url, id, ".fasta") 
+                                   file_from_uniprot =urlopen(url_with_id)
+                                   fasta=file_from_uniprot.readlines()
+                                   f=open(fast_output+'/'+e+'_'+id+'.fasta','w')
+                                   for line in fasta:
+                                        line=line.decode('utf-8')#remove the Bytes literals,b', from lines 
+                                        if 'SV=' in line:
+                                           header=line.replace(line.strip(),line.strip()+' '+e.replace(' ','='))
+                                           f.write(header)
+                                        else:
+                                           fasta_seq=line.strip()
+                                           f.write(fasta_seq)
+                                   f.close()                             
+                    except Exception as error:
+                         print (str(error))
      #print ('EC numbers are now added to Fasta headers')
 if __name__ == "__main__":
      uniprot_url = "http://www.uniprot.org/uniprot/"  # constant Uniprot Namespace
