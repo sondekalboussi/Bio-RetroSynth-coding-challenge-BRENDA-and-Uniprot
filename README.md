@@ -1,6 +1,6 @@
 # Bio-RetroSynth-coding-challenge-BRENDA-and-Uniprot
 For every EC number listed in the BRENDA database, retrieve all the Uniprot accessions associated to the EC number in FASTA format. The corresponding EC number(s) from BRENDA must be present in the FASTA header.
-BRENDA
+# BRENDA
 The BRENDA database is the most important repository on enzyme activity and enzyme
 ligands. Website: https://www.brenda-enzymes.org/
 BRENDA proposes free and subscription-based programmatic access to enzyme data. The
@@ -11,14 +11,17 @@ BRENDA associates enzyme activity information (provided by EC numbers, EC 6.6.1.
 instance) with sequence information (provided by accession number, P29929 for instance).
 The BRENDA flat file may be parsed with BRENDA-Parser:
 https://github.com/alexandra-zaharia/BRENDA-Parser
-Uniprot
+# Uniprot
 Protein sequences are available in Uniprot in FASTA format (among other formats).
 For example, the FASTA header for accession P29929 is the following:
+
 >sp|P29929|COBN_SINSX Aerobic cobaltochelatase subunit CobN
 OS=Sinorhizobium sp. OX=42445 GN=cobN PE=1 SV=1
-Challenge
+
+# Challenge
 We wish to modify the FASTA header such that it contains EC number information; in the
 case of P29929 it should be associated to EC 6.6.1.2. The FASTA header should therefore
 read:
+
 >sp|P29929|COBN_SINSX Aerobic cobaltochelatase subunit CobN
 OS=Sinorhizobium sp. OX=42445 GN=cobN PE=1 SV=1 EC=6.6.1.2
