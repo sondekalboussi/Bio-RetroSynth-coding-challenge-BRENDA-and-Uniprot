@@ -45,7 +45,6 @@ def EC_in_fasta():
                if len(uniprot_id)!=0:#for one EC number we can have more than one id depending on the organism
                     try:  
                          for id in uniprot_id:
-                              if id!='1.3.1.193':#this Ec is mentioned as new one in flat file comment but now is removed from the db
                                    url_with_id = "%s%s%s" %(uniprot_url, id, ".fasta") 
                                    file_from_uniprot =urlopen(url_with_id)
                                    fasta=file_from_uniprot.readlines()
