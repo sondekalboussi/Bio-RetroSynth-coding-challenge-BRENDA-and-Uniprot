@@ -1,4 +1,4 @@
-# Bio-RetroSynth-coding-challenge-BRENDA-and-Uniprot
+# Brenda_Ec_Uniprot_fasta
 For every EC number listed in the BRENDA database, retrieve all the Uniprot accessions associated to the EC number in FASTA format. The corresponding EC number(s) from BRENDA must be present in the FASTA header.
 The starting point of this code is a project improved by Alexandra-zaharia https://github.com/alexandra-zaharia/BRENDA-Parser, Brenda Parser is used to Parse the string representing a comment associated to an EC numbe, Using this EC number we extraxt UniProt accessions identifiers, get the fasta record of the Uniprot ID, append the corresponding EC number to the header and save the fasta file in the local machine. 
 
