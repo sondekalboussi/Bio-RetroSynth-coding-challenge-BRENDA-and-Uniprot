@@ -8,7 +8,7 @@ import sys,os,re
 sys.path.insert(0, 'BRENDA-Parser')
 from urllib.request import urlopen
 from brenda.parser import BRENDAParser
-def EC_infasta():
+def EC_in_fasta():
      '''
      -Parse the string representing a comment associated to an EC numbe
      -Parse EC number from the comment and save non duplicated 
@@ -60,7 +60,7 @@ def EC_infasta():
                               f.close()                             
                     except Exception as e:
                          print (str(e))
-     print ('EC numbers are added to Fasta headers')
+     print ('EC numbers are now added to Fasta headers')
 if __name__ == "__main__":
      uniprot_url = "http://www.uniprot.org/uniprot/"  # constant Uniprot Namespace
      brenda_flat='brenda_download.txt'
