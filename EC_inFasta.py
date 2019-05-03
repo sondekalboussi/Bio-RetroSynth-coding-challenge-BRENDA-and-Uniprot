@@ -10,7 +10,7 @@ from urllib.request import urlopen
 from brenda.parser import BRENDAParser
 def EC_in_fasta():
      '''
-     -Parse the string representing a comment associated to an EC numbe
+     -Parse the string string designating the EC number
      -Parse EC number from the comment and save non duplicated 
      ones to a global variable
      -Parse UniProt accessions id using EC numbers
@@ -28,7 +28,7 @@ def EC_in_fasta():
      
      ec_comment = [ec for ec in brenda if brenda[ec][0].comment is not None]
      for i in range(0,len(ec_comment)):
-          ec=brenda[ec_comment[i]][0].comment#valid Ec number from the comment
+          ec=brenda[ec_comment[0]][0].ec_number
           EC=re.findall(r'\bEC\s[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\b',ec)#regular expression to parse EC from comment
           for i in EC:
                if i not in EC_final:#remove duplicated EC numbers
@@ -37,12 +37,14 @@ def EC_in_fasta():
      if not os.path.isdir(fast_output):
               os.makedirs(fast_output)     
      print ('Extractin of uniprot identifiers and Fasta file modification')
+     unip_EC={}#keyare uniprotid,value is EC
      for e in EC_final:
           EC_number=e.split("EC ")[1]#string of ec_numbers to be used to find the protein identifier
           #if EC_number!='1.3.1.193':#this Ec is mentioned as new one in flat file comment but now is removed from the db
           for prot_id in brenda[EC_number][0].proteins:
                protein = brenda[EC_number][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
+               uniprot_EC[e]=uniprot_id
                if len(uniprot_id)!=0:#for one EC number we can have more than one id depending on the organism
                     try:  
                          for id in uniprot_id:
@@ -52,7 +54,7 @@ def EC_in_fasta():
                                    f=open(fast_output+'/'+e+'_'+id+'.fasta','w')
                                    for line in fasta:
                                         line=line.decode('utf-8')#remove the Bytes literals,b', from lines 
-                                        if 'SV=' in line:
+                                        if line.startswith('>'):
                                            header=line.replace(line.strip(),line.strip()+' '+e.replace(' ','='))
                                            f.write(header)
                                         else:
