@@ -43,13 +43,12 @@ def EC_infasta():
           for prot_id in brenda[e][0].proteins:
                protein = brenda[e][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
-               if len(uniprot_id)!=0:#for one EC number we can have more than one id depending on the organism
-                    EC='EC= '+e
+               if len(uniprot_id)!=0:
                     Uniprot_EC[EC]=uniprot_id
-     Multi_EC= collections.defaultdict(list)#Multi EC number for one uniprot id
+     Multi_EC= collections.defaultdict(list)# reversed dic with key is uniprot id and value is list of EC multiple numbers 
      for key,value in Uniprot_EC.items():
          for i in value:
-            Multi_EC[i].append(key)# reversed dic with key is uniprot id and value is list of EC multiple numbers 
+            Multi_EC[i].append(key)
      for n,m in Multi_EC.items():
           try:
                 url_with_id = "%s%s%s" %(uniprot_url,n, ".fasta") 
