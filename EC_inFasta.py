@@ -44,7 +44,8 @@ def EC_infasta():
                protein = brenda[e][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
                if len(uniprot_id)!=0:#for one EC number we can have more than one id depending on the organism
-                    Uniprot_EC[e]=uniprot_id
+                    EC='EC= '+e
+                    Uniprot_EC[EC]=uniprot_id
      Multi_EC= collections.defaultdict(list)#Multi EC number for one uniprot id
      for key,value in Uniprot_EC.items():
          for i in value:
@@ -60,10 +61,10 @@ def EC_infasta():
                     if line.startswith('>'):
                         if len(m)>1:                                            
                             print(n,' has multiple EC number') 
-                            header= line.replace(line,line+' '+' '.join([j.replace(' ','=') for j in m]))  
+                            header= line.replace(line,line+' '+' '.join([j for j in m]))  
                             f.write('%s\n' % (header))
                         else: 
-                            header=line.replace(line,line+' '+''.join(m).replace(' ','='))
+                            header=line.replace(line,line+' '+''.join(m))
                             f.write('%s\n' % (header))
                     else:
                            fasta_seq=line.strip()
