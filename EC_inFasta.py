@@ -24,17 +24,14 @@ def EC_infasta():
           try:
                  brenda = parser.parse()
           except Exception as e:
-                 print (str(e))
-     
-     ec_comment = [ec for ec in brenda if brenda[ec][0].comment is not None]
-     for i in range(0,len(ec_comment)):
-          ec=brenda[ec_comment[i]][0].ec_number
-          #ec=brenda[ec_comment[i]][0].comment#ec number in comment
+                 print (str(e))     
+     EC_number= [ec for ec in brenda]
+     for i in range(0,len(EC_number)):
           #EC=re.findall(r'\bEC\s[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\b',ec)#regular expression to parse EC from comment
-          for i in ec:
+          for i in EC_number:
             if i not in EC_final:#remove duplicated EC numbers
                EC_final.append(i)               
-     print(str(len(EC_final)),'EC number were parsed.')
+     print (str(len(EC_final)),'EC number were parsed.')
      if not os.path.isdir(fast_output):
               os.makedirs(fast_output)     
      print ('Extraction of uniprot identifiers and fasta modification')   
@@ -44,6 +41,7 @@ def EC_infasta():
                protein = brenda[e][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
                if len(uniprot_id)!=0:
+                    EC='EC= '+e
                     Uniprot_EC[EC]=uniprot_id
      Multi_EC= collections.defaultdict(list)# reversed dic with key is uniprot id and value is list of EC multiple numbers 
      for key,value in Uniprot_EC.items():
