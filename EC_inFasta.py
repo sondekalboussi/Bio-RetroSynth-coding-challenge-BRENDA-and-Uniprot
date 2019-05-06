@@ -27,7 +27,6 @@ def EC_infasta():
                  print (str(e))     
      EC_number= [ec for ec in brenda]
      for i in range(0,len(EC_number)):
-          #EC=re.findall(r'\bEC\s[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\b',ec)#regular expression to parse EC from comment
           for i in EC_number:
             if i not in EC_final:#remove duplicated EC numbers
                EC_final.append(i)               
