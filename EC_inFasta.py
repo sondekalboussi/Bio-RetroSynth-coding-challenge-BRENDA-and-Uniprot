@@ -37,7 +37,7 @@ def EC_infasta():
                if len(uniprot_id)!=0:
                     EC='EC= '+e
                     Uniprot_EC[EC]=uniprot_id
-     Multi_EC= collections.defaultdict(list)# reversed dic with key is uniprot id and value is list of EC multiple numbers 
+     Multi_EC= collections.defaultdict(list)# reversed dic with key is uniprot id and value is list of EC number(s) if exist.
      for key,value in Uniprot_EC.items():
          for i in value:
             Multi_EC[i].append(key)
