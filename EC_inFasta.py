@@ -18,24 +18,19 @@ def EC_infasta():
      -append the corresponding EC number to the header and save the fasta
           file in the local machine
         '''    
-     EC_final=[]
      print ('Brenda parser is starting')
      with BRENDAParser(brenda_flat) as parser:
           try:
                  brenda = parser.parse()
           except Exception as e:
                  print (str(e))     
-     EC_number= [ec for ec in brenda]
-     for i in range(0,len(EC_number)):
-          for i in EC_number:
-            if i not in EC_final:#remove duplicated EC numbers
-               EC_final.append(i)               
-     print (str(len(EC_final)),'EC number were parsed.')
+     EC_number= [ec for ec in brenda]            
+     print (str(len(EC_number)),'EC number were parsed.')
      if not os.path.isdir(fast_output):
               os.makedirs(fast_output)     
      print ('Extraction of uniprot identifiers and fasta modification')   
      Uniprot_EC={}#dic key is EC and value is uniprot id
-     for e in EC_final:
+     for e in EC_number:
           for prot_id in brenda[e][0].proteins:
                protein = brenda[e][0].proteins[prot_id]
                uniprot_id=protein.identifiers#list of uniprot identifiers
@@ -51,12 +46,12 @@ def EC_infasta():
                 url_with_id = "%s%s%s" %(uniprot_url,n, ".fasta") 
                 file_from_uniprot =urlopen(url_with_id)
                 fasta=file_from_uniprot.readlines()
-                f=open('fasta_output\\'+n+'.fasta','w+')
+                f=open(fast_output+'\'+n+'.fasta','w+')
                 for line in fasta:
                     line=line.strip().decode('utf-8')
                     if line.startswith('>'):
                         if len(m)>1:                                            
-                            print(n,' has multiple EC number') 
+                            #print(n,' has multiple EC number'): add this line to see the uniprot id with multiple Ec number
                             header= line.replace(line,line+' '+' '.join([j for j in m]))  
                             f.write('%s\n' % (header))
                         else: 
@@ -75,5 +70,4 @@ if __name__ == "__main__":
      uniprot_url = "http://www.uniprot.org/uniprot/"  # constant Uniprot Namespace
      brenda_flat='brenda_download.txt'
      fast_output='EC_unip_fasta'
-     print (EC_infasta())
-
+print (EC_infasta())
